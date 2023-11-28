@@ -6,4 +6,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+struct path
+{
+	char *dir;
+	struct path *next;
+};
+
+char *exe_finder(void);
+
 #endif
