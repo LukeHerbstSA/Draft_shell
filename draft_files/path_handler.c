@@ -15,13 +15,13 @@ struct path *exe_finder(void)
 
 	tmp = malloc(sizeof(struct path));
 	head = tmp;
-	dir = strtok(buffer, ":") + 1;
+	dir = strtok(buffer, ":");
 	if (buffer == NULL || tmp == NULL || dir == NULL)
 		return (NULL);
 	while (dir != NULL)
 	{
 		tmp->dir = dir;
-		dir = strtok(NULL, ":") + 1;
+		dir = strtok(NULL, ":");
 		if (dir == NULL)
 		{
 			tmp->next = NULL;

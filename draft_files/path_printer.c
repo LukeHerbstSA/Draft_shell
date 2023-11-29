@@ -15,12 +15,12 @@ int main(void)
 	printf("Before getenv");
 	buffer = getenv("PATH");
 	printf("%s\n", buffer);
-	dir = strtok(buffer, ":") + 1;
+	dir = strtok(buffer, ":");
 	while (dir != NULL)
 	{
 		printf("%s\n", dir);
 		printf("After a dir has been printed\n");
-		dir = strtok(NULL, ":") + 1;
+		dir = strtok(NULL, ":");
 	}
 	printf("after all paths have been printed");
 	free(buffer);

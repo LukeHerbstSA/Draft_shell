@@ -1,46 +1,31 @@
 #include "main.h"
 
-int main(void)
+void main(void)
 {
-	char **args;
-	char *buffer;
-	char *buffer2;
-	char *token;
-	size_t buffsize = 0;
-	size_t pid;
-	int gen;
+	char **user_cmds;
+	char *first_arg;
+	struct path *directories;
+	struct path *tmp;
+        size_t pid;
 
-	buffer = malloc(100);
 	while (1)
 	{
-		printf("$ ");
-		gen = getline(&buffer, &buffsize, stdin);
-		if (gen == -1)
-		{
-			printf("Getline failed\n");
-			return (-1);
-		}
-		printf("After getline\n");
-		buffer2 = malloc(gen);
-		strcpy(buffer2, buffer);
-		token = strtok(buffer, "\n ");
-		for (gen = 0; token != NULL; gen++)
-		{
-			token = strtok(NULL, "\n ");
-		}
-		args = malloc(gen * sizeof(char *) + 1);
-		token = strtok(buffer2, "\n ");
-		for (gen = 0; token != NULL; gen++)
-		{
-			args[gen] = malloc(strlen(token) + 1);
-			strcpy(args[gen], token);
-			token = strtok(NULL, "\n ");
-		}
-		args[gen] = NULL;
+		user_cmds = prompter();
+		directories = exe_finder();
+		first_arg = user_cmds[0];
+		tmp = directories;
 		pid = fork();
 		if (pid == 0)
 		{
-			execve(args[0], args, NULL);
+			while (tmp != NULL)
+			{
+				strcopy(user_cmds[0], tmp->dir);
+				strcat(user_cmds[0], first_arg);
+				execve(user_cmds[0], user_cmds, NULL);
+				tmp = tmp->next;
+			}
+			if (tmp == NULL)
+				printf("Something went wrong with the passed args\n");
 		}
 		wait(NULL);
 		free(buffer);

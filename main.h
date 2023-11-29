@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 struct path *exe_finder(void);
+char **prompt(void);
 
 struct path
 {
