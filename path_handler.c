@@ -1,11 +1,12 @@
 #include "main.h"
 
+struct path;
 /**
 	* exe_finder - char *ptr func
 	* Description: builds a singly linked list from path variable
 	* Return: struct path *head so main func can access the list
 	*/
-char *exe_finder(void)
+struct path *exe_finder(void)
 {
 	struct path *head;
 	char *buffer = getenv("PATH");

@@ -19,8 +19,11 @@ int main(void)
 	while (dir != NULL)
 	{
 		printf("%s\n", dir);
+		printf("After a dir has been printed\n");
 		dir = strtok(NULL, ":") + 1;
 	}
+	printf("after all paths have been printed");
 	free(buffer);
+	free(dir);
 	return (0);
 }
