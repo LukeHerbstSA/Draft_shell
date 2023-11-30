@@ -5,18 +5,24 @@ char **prompt(void)
 	char **args;
 	char *buffer;
 	char *buffer2;
+	char *line_buff;
 	char *token;
 	size_t buffsize = 0;
 	int gen;
+	int len;
 
 	buffer = malloc(100);
-
+	line_buff = malloc(100);
 	printf("$ ");
-	gen = getline(&buffer, &buffsize, stdin);
-	if (gen == -1)
+	while (1)
 	{
-		printf("Getline failed\n");
-		return;
+		gen = getline(&line_buff, &buffsize, stdin);
+		if (gen == -1)
+		{
+			printf("Getline failed\n");
+			return;
+		}
+
 	}
 	printf("After getline\n");
 	buffer2 = malloc(gen);

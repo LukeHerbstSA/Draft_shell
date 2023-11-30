@@ -4,16 +4,16 @@ void main(void)
 {
 	char **user_cmds;
 	char *first_arg;
-	struct path *directories;
+	struct path *path_head;
 	struct path *tmp;
         size_t pid;
 
 	while (1)
 	{
 		user_cmds = prompter();
-		directories = exe_finder();
+		path_head = exe_finder();
 		first_arg = user_cmds[0];
-		tmp = directories;
+		tmp = path_head;
 		pid = fork();
 		if (pid == 0)
 		{
