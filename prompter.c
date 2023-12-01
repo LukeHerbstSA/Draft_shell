@@ -11,18 +11,18 @@ char **prompt(void)
 	int gen;
 	int len;
 
-	buffer = malloc(100);
+	gen = 0;
+	buffer = malloc(150);
 	line_buff = malloc(100);
 	printf("$ ");
-	while (1)
+	while (1) /* Need to test for EOF  instead of '\0' - So that I can break with Ctrl+D */
 	{
 		gen = getline(&line_buff, &buffsize, stdin);
 		if (gen == -1)
-		{
-			printf("Getline failed\n");
-			return;
-		}
-
+			return (NULL)
+		strcat(buffer, linebuff);
+		if (line[-1] != '\n') /* breaks if theres no newline*/
+			break;
 	}
 	printf("After getline\n");
 	buffer2 = malloc(gen);
