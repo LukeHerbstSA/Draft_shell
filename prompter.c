@@ -12,7 +12,7 @@ char **prompt(void)
 
 	gen = 0;
 	len = 0;
-	buffer = malloc(100);
+	buffer = malloc(1024);
 	line_buff = malloc(100);
 	printf("$ ");
 	while (1)
