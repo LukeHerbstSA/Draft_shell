@@ -9,8 +9,9 @@ char **prompt(void)
 	char *token;
 	size_t buffsize = 0;
 	int gen;
-	int len;
 
+	gen = 0;
+	len = 0;
 	buffer = malloc(100);
 	line_buff = malloc(100);
 	printf("$ ");
@@ -22,10 +23,15 @@ char **prompt(void)
 			printf("Getline failed\n");
 			return;
 		}
-
+		len += gen;
+		if (linebuff[-1] != '\n')
+		{
+			len++;
+			break;
+		}
 	}
 	printf("After getline\n");
-	buffer2 = malloc(gen);
+	buffer2 = malloc(len);
 	strcpy(buffer2, buffer);
 	token = strtok(buffer, "\n ");
 	for (gen = 0; token != NULL; gen++)
