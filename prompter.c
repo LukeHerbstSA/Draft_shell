@@ -1,6 +1,11 @@
 #include "main.h"
 
-char **prompt(void)
+/**
+	* prompt - char ptr
+	* Description: prompts the user to pass some input
+	* Return: pointer to buffer containing input
+	*/
+char *prompt(void)
 {
 	char **args;
 	char *buffer;
@@ -8,11 +13,9 @@ char **prompt(void)
 	char *line_buff;
 	char *token;
 	size_t buffsize = 0;
-	int gen;
-	int len;
+	int gen = 0;
+	int len = 0;
 
-	gen = 0;
-	len = 0;
 	buffer = malloc(1024);
 	line_buff = malloc(100);
 	printf("$ ");
@@ -32,21 +35,5 @@ char **prompt(void)
 		}
 	}
 	printf("After getline\n");
-	buffer2 = malloc(len + 1);
-	strcpy(buffer2, buffer);
-	token = strtok(buffer, "\n ");
-	for (gen = 0; token != NULL; gen++)
-	{
-		token = strtok(NULL, "\n ");
-	}
-	args = malloc(gen * sizeof(char *) + 1);
-	token = strtok(buffer2, "\n ");
-	for (gen = 0; token != NULL; gen++)
-	{
-		args[gen] = malloc(strlen(token) + 1);
-		strcpy(args[gen], token);
-		token = strtok(NULL, "\n ");
-	}
-	args[gen] = NULL;
-	return (args);
+	return (buffer);
 }

@@ -1,53 +1,47 @@
 #include "main.h"
 
+/**
+	* main - int function
+	* Description: loop that only breaks on error, to return int code to main
+	*/
 void main(void)
 {
 	char **user_cmds;
+	char *buffer;
 	char *first_arg;
 	struct path *path_head;
-	struct path *tmp;
-        size_t pid;
-	int restart = 1;
+	int gen;
+	int exit_code;
 
 	while (1)
 	{
-		user_cmds = prompter(); /* If prompter == NULL, this loop needs to start again  (new prompt)*/
-		path_head = exe_finder(); /* same goes for exe finder, unless it return a null pointer, then return bad name command */
-		first_arg = user_cmds[0]; /* if there is no slashes in the file name  passed  (user typed ls instead of /bin/ls) do the directory search but if not, just execve */
-		for (i = 0; first_arg[i] != '\0'; i++)
+		while (1) /* Error codes may need a specific way to deal with them */
 		{
-			if (first_arg[i] == '/')
+			buffer = prompter();
+			if (buffer == NULL)
+				exit_code = 1;
+			user_cmds = tokenizer(buffer);
+			if (user_cmds == NULL)
+			{
+				printf("Something went wrong with the command you gave\n");
+				exit_code = 2;
 				break;
-		}
-		if (first_arg[i] != '\0')
-		{
-			pid = fork();
-			if (pid == 0)
-			{
-				execve(first_arg, user_cmds; NULL);
-				printf("Passed file does not exist");
-				restart = 0;
 			}
-			wait(NULL);
-		}
-		if (restart == 1)
-		{
-			tmp = path_head;
-			pid = fork();
-			if (pid == 0)
+			path_head = exe_finder();
+			if (path_head == NULL)
 			{
-				while (tmp != NULL)
-				{
-					strcopy(user_cmds[0], tmp->dir);
-					strcat(user_cmds[0], first_arg);
-					execve(user_cmds[0], user_cmds, NULL);
-					tmp = tmp->next;
-				}
-				if (tmp == NULL)
-					printf("Something went wrong with the passed args\n");
+				printf("Something went wrong when building your PATH\n");
+				exit_code = 3;
+				break;
 			}
-			wait(NULL);
-			free(buffer);
-			free(buffer2);
+			first_arg = user_cmds[0];
+			gen = finder(path_head, user_cmds, first_arg);
+			if (gen == -1)
+			{
+				printf("Something went wrong finding your file\n");
+				exit_code = 4;
+				break;
+			}
 		}
+	}
 }

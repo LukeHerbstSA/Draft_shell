@@ -1,6 +1,5 @@
 #include "main.h"
 
-struct path;
 /**
 	* exe_finder - char *ptr func
 	* Description: builds a singly linked list from path variable
