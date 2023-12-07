@@ -18,6 +18,7 @@ char **tokenizer(char *buffer)
 	if (buffer2 == NULL)
 		return (NULL);
 	strcpy(buffer2, buffer);
+	printf("buffer: %s\nbuffer2: %s\n", buffer, buffer2);
 	token = strtok(buffer, "\n ");
 	for (gen = 0; token != NULL; gen++)
 	{
