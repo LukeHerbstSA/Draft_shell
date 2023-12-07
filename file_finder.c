@@ -13,20 +13,20 @@ int file_finder(char **user_cmds, struct path *tmp)
 	char *first_arg;
 
 	first_arg = user_cmds[0];
+	printf("%s\n", first_arg);
 	pid = fork();
 	if (pid == 0)
 	{
 		while (tmp != NULL)
 		{
-			strcopy(user_cmds[0], tmp->dir);
+			printf("%s\n", tmp->dir);
+			strcpy(user_cmds[0], tmp->dir);
 			strcat(user_cmds[0], first_arg);
 			execve(user_cmds[0], user_cmds, NULL);
 			tmp = tmp->next;
 		}
 		if (tmp == NULL)
-		{
 			printf("Command not found in PATH\n");
-		}
 	}
 	wait(NULL);
 	return (0);

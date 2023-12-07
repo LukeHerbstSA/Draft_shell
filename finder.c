@@ -35,6 +35,9 @@ int finder(struct path *path_head, char **user_cmds, char *first_arg)
 		wait(NULL);
 	}
 	if (restart == 1)
-		finder(user_cmds, tmp);
+	{
+		printf("command is filename without path\n");
+		file_finder(user_cmds, tmp);
+	}
 	return (0);
 }

@@ -19,6 +19,7 @@ struct path *exe_finder(void)
 		return (NULL);
 	while (dir != NULL)
 	{
+		printf("%s\n", dir);
 		tmp->dir = dir;
 		dir = strtok(NULL, ":");
 		if (dir == NULL)

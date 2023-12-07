@@ -11,8 +11,10 @@ char **tokenizer(char *buffer)
 	char *buffer2;
 	char *token;
 	char **args;
+	int gen;
 
-	buffer2 = malloc(len + 1);
+	token = malloc(100);
+	buffer2 = malloc(strlen(buffer) + 1);
 	if (buffer2 == NULL)
 		return (NULL);
 	strcpy(buffer2, buffer);
@@ -32,7 +34,8 @@ char **tokenizer(char *buffer)
 		token = strtok(NULL, "\n ");
 	}
 	args[gen] = NULL;
+	free(token);
 	free(buffer);
-	free(line_buff);
+	free(buffer2);
 	return (args);
 }

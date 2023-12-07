@@ -7,33 +7,26 @@
 	*/
 char *prompt(void)
 {
-	char **args;
 	char *buffer;
-	char *buffer2;
-	char *line_buff;
 	char *token;
 	size_t buffsize = 0;
 	int gen = 0;
-	int len = 0;
 
 	buffer = malloc(1024);
-	line_buff = malloc(100);
+	token = malloc(100);
 	printf("$ ");
 	while (1)
 	{
-		gen = getline(&line_buff, &buffsize, stdin);
-		if (gen == -1)
+		if (getline(&token, &buffsize, stdin) == EOF)
 		{
-			printf("Getline failed\n");
+			printf("Getline was passed ctrl+d\n");
 			return (NULL);
 		}
-		len += gen;
-		if (linebuff[-1] != '\n')
-		{
-			len++;
+		strcat(buffer, token);
+		if (token[-1] != '\n')
 			break;
-		}
 	}
 	printf("After getline\n");
+	free (token);
 	return (buffer);
 }

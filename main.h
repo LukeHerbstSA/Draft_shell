@@ -13,8 +13,9 @@ struct path
 };
 
 char **tokenizer(char *buffer);
-char **prompt(void);
+char *prompt(void);
 struct path *exe_finder(void);
 int finder(struct path *path_head, char **user_cmds, char *first_arg);
+int file_finder(char **user_cmds, struct path *tmp);
 
 #endif
